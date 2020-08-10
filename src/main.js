@@ -28,7 +28,6 @@ client.on('message', (msg) => {
 	let cmdArgs = cmdMsg.split(new RegExp(/\s+/));
 	// Isolate command name
 	let cmdName = cmdArgs.shift().toLowerCase();
-
 	// Lookup map, if command exists, run and pass client,msg,args instances
 	if (client.commands.get(cmdName)) {
 		client.commands.get(cmdName).run(client, msg, cmdArgs);
