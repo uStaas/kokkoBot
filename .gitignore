@@ -1,2 +1,7 @@
+.gitignore
 node_modules
 .env
+dist
+src/assets/images
+src/assets/sound
+src/config.ts
