@@ -1,5 +1,5 @@
 {
-	"name": "kokkoBot",
+	"name": "kokkobot",
 	"version": "1.0.0",
 	"description": "A bot for community usage!",
 	"main": "src/index.ts",
@@ -10,7 +10,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "kokkoBot"
+		"url": "kokkobot"
 	},
 	"author": "Efstathios Papakostas <csd4143@csd.uoc.gr>",
 	"license": "MIT",
