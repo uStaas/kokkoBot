@@ -1,13 +1,22 @@
 import * as Discord from 'discord.js';
 import * as config from '../config';
-import { IBotCommand } from '../api';
+import { IBotCommand } from '../util/api';
 
 export default class playsound implements IBotCommand {
 	private readonly _command = 'playsound';
 
 	help(): string {
-		return 'Usage: $playsound \n This command plays a sound.';
+		return 'This command plays a sound.';
 	}
+
+	usage(): string {
+		return `Usage: ${config.PREFIX + this._command}`;
+	}
+
+	nsfw(): boolean {
+		return false;
+	}
+
 
 	isThisCommand(command: string): boolean {
 		return command === this._command;

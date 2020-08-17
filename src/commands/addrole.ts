@@ -1,8 +1,6 @@
 import * as Discord from 'discord.js';
-import { IBotCommand } from '../api';
+import { IBotCommand } from '../util/api';
 import * as config from '../config';
-import { clear } from 'console';
-import { DESTRUCTION } from 'dns';
 
 export default class addrole implements IBotCommand {
 	private readonly _command = 'addrole';
@@ -12,8 +10,17 @@ export default class addrole implements IBotCommand {
 	}
 
 	help(): string {
-		return 'Usage: $addrole <Role 1> [Role 2] \n\n This command adds you to the role(s) specified.';
+		return 'This command adds you to the role(s) specified.';
 	}
+
+	usage(): string {
+		return `Usage: ${config.PREFIX + this._command} Role [Role2,Role3...]`;
+	}
+
+	nsfw(): boolean {
+		return false;
+	}
+
 
 	isThisCommand(command: string): boolean {
 		return command === this._command;

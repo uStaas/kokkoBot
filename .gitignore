@@ -1,6 +1,6 @@
 .gitignore
-node_modules
 .env
+node_modules
 dist
 src/assets/images
 src/assets/sound

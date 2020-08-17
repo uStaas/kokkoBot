@@ -1,14 +1,23 @@
 import * as Discord from 'discord.js';
-import { IBotCommand } from '../api';
-
+import { IBotCommand } from '../util/api';
 import { term } from 'urban-dictionary';
+import * as config from '../config'
 
 export default class ud implements IBotCommand {
 	private readonly _command = 'ud';
 
 	help(): string {
-		return 'Usage: $ud <word/phrase/slang> \n\n This command fetches a definition for the given word from Urban Dictionary.';
+		return 'This command fetches a definition for the given term from Urban Dictionary.';
 	}
+
+	usage(): string {
+		return `Usage: ${config.PREFIX + this._command} some_term`;
+	}
+
+	nsfw(): boolean {
+		return false;
+	}
+
 
 	isThisCommand(command: string): boolean {
 		return command === this._command;
@@ -16,34 +25,22 @@ export default class ud implements IBotCommand {
 
 	run(args: string[], msg: Discord.Message, client: Discord.Client): void {
 		let embed = new Discord.MessageEmbed();
+		embed.setImage('https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/UD_logo-01.svg/1200px-UD_logo-01.svg.png')
+			.setFooter('Thelw na piw nero © 2020', client.user.avatarURL())
+			.setTimestamp();
 		term(args.join(' '), (error, entries, tags, sounds) => {
 			if (error) {
-				embed
-					.setImage(
-						'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/UD_logo-01.svg/1200px-UD_logo-01.svg.png'
-					)
-					.setColor('#ff0000')
+				embed.setColor('#ff0000')
 					.setTitle('Error')
-					.setDescription(`${msg.author}, no such definition on Urban Dictionary`);
+					.setDescription(`${msg.author}, no such definition on Urban Dictionary`)
 			} else {
-				embed
-					.setURL(entries[0].permalink)
-					.setImage(
-						'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/UD_logo-01.svg/1200px-UD_logo-01.svg.png'
-					)
-					.setColor('#2222ff')
+				embed.setColor('#2222ff')
 					.setTitle(entries[0].word)
-					.addFields(
-						{
-							name: 'Definition',
-							value: entries[0].definition
-						},
-						{
-							name: 'Example',
-							value: entries[0].example
-						}
+					.setURL(entries[0].permalink)
+					.addFields({ name: 'Definition', value: entries[0].definition },
+						{ name: 'Example', value: entries[0].example }
 					)
-					.setTimestamp();
+
 			}
 			msg.channel.send(embed);
 		});
