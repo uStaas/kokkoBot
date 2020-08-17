@@ -1,6 +1,8 @@
 # kokkoBot
 A bot for Discord Communities!
 
+![Logo](https://i.imgur.com/RJEUnPY.jpg)
+
 ## Installation
 
 ### Windows
